@@ -11,6 +11,9 @@ app.use(cors())
 app.use(express.json())
 app.use('/auth', authRouter)
 app.use('/info-penting', hospitalRouter)
+app.get("/", (req, res) => {
+  res.send("Hello Quotes!");
+});
 
 // server mongodb
 mongoose.connect(process.env.MONGO_URL, {
