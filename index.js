@@ -4,16 +4,18 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const authRouter = require('./routes/auth')
 const hospitalRouter = require('./routes/hospital')
-const port = process.env.PORT || 4000;
+const helpPostRouter = require('./routes/help-post')
+const port = process.env.PORT || 8000;
 const app = express();
 
 app.use(cors())
 app.use(express.json())
 app.use('/auth', authRouter)
 app.use('/info-penting', hospitalRouter)
-app.get("/", (req, res) => {
-  res.send("Hello Quotes!");
-});
+app.use('/help', helpPostRouter)
+// app.get("/", (req, res) => {
+//   res.send("Hello Quotes!");
+// });
 
 // server mongodb
 mongoose.connect(process.env.MONGO_URL, {
