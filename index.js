@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const authRouter = require('./routes/auth')
 const hospitalRouter = require('./routes/hospital')
 const helpPostRouter = require('./routes/help-post')
+const covidCaseRouter = require('./routes/covid')
 const port = process.env.PORT || 8000;
 const app = express();
 
@@ -13,12 +14,10 @@ app.use(express.json())
 app.use('/auth', authRouter)
 app.use('/info-penting', hospitalRouter)
 app.use('/help', helpPostRouter)
-// app.get("/", (req, res) => {
-//   res.send("Hello Quotes!");
-// });
+app.use('/covid', covidCaseRouter)
 
 // server mongodb
-mongoose.connect(process.env.MONGO_URL , {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
