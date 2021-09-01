@@ -43,3 +43,24 @@ exports.createPost = async (req, res, next) => {
       console.log(err)
     })
 }
+
+exports.getHelpPostById = (req, res, next) => {
+  const postId = req.params.postId
+
+  helpPosts.findById(postId)
+    .then(result => {
+      if (!result) {
+        res.status(404).send({ message: "Not found Tutorial with id " + id });
+        console.log(eror);
+      }
+      res.status(200).json({
+        message: ' data help post successfully received',
+        data: result
+      })
+      console.log(result)
+    })
+    .catch(err => {
+      next(err)
+      console.log(result)
+    })
+};
