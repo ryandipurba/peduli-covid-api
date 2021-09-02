@@ -18,6 +18,10 @@ const user = new Schema({
     type: String,
     required: true
   },
+  tipe: {
+    type: String,
+    required: true
+  }
 }, {
   timestamps: true
 

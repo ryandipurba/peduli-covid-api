@@ -4,7 +4,7 @@ require('dotenv').config()
 const jsonwebtoken = require('jsonwebtoken')
 
 exports.register = async (req, res, next) => {
-  const { name, username, email, password } = req.body
+  const { name, username, email, password, tipe } = req.body
   const hashPassword = await bcryptjs.hash(password, 10)
   const emailUser = await users.findOne({ email: email })
   const usernameUser = await users.findOne({ username: username })
@@ -25,8 +25,8 @@ exports.register = async (req, res, next) => {
     name: name,
     username: username,
     email: email,
-    password: hashPassword
-
+    password: hashPassword,
+    tipe: tipe
   })
 
   user.save()
@@ -50,6 +50,7 @@ exports.login = async (req, res, next) => {
     if (passwordUser) {
       const data = {
         id: dataUser._id,
+        type: dataUser.type,
         name: dataUser.name
       }
       const token = await jsonwebtoken.sign(data, process.env.JWT_SECRET)

@@ -25,11 +25,11 @@ exports.createPost = async (req, res, next) => {
     provinsi: provinsi,
     deskripsi: deskripsi,
     kebutuhan: kebutuhan,
+    terkumpul: 0,
     norek: norek,
     image: image,
     sosmed: sosmed,
     status: true
-
   })
 
   helpPost.save()

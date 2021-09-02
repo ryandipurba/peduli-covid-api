@@ -27,7 +27,11 @@ const HelpPost = new Schema({
     required: true
   },
   kebutuhan: {
-    type: String,
+    type: Number,
+    required: true
+  },
+  terkumpul: {
+    type: Number,
     required: true
   },
   norek: {
