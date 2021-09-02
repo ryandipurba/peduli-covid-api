@@ -50,7 +50,7 @@ exports.login = async (req, res, next) => {
     if (passwordUser) {
       const data = {
         id: dataUser._id,
-        type: dataUser.type,
+        type: dataUser.tipe,
         name: dataUser.name
       }
       const token = await jsonwebtoken.sign(data, process.env.JWT_SECRET)
