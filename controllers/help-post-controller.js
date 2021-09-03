@@ -68,6 +68,8 @@ exports.getHelpPostById = (req, res, next) => {
 exports.updatePost = (req, res, next) => {
   const postId = req.params.postId
   const donasi = req.body.donasi
+  const admin = req.body.admin
+  console.log(admin);
   console.log(donasi);
 
   helpPosts.findById(postId)
@@ -76,7 +78,13 @@ exports.updatePost = (req, res, next) => {
         res.status(404).send({ message: "Not found id " + id });
         console.log(eror);
       }
-      result.terkumpul = (parseInt(result.terkumpul) + parseInt(donasi))
+      if (admin === "admin") {
+        result.status = true
+      }
+
+      if (donasi != null) {
+        result.terkumpul = (parseInt(result.terkumpul) + parseInt(donasi))
+      }
       return result.save()
     })
     .then(result => {
