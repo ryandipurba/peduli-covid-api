@@ -82,7 +82,7 @@ exports.updatePost = (req, res, next) => {
         result.status = true
       }
 
-      if (donasi !== 0 || donasi !== null) {
+      if (donasi !== 0) {
         result.terkumpul = (parseInt(result.terkumpul) + parseInt(donasi))
       }
       return result.save()
