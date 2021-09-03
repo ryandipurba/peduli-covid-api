@@ -29,7 +29,7 @@ exports.createPost = async (req, res, next) => {
     norek: norek,
     image: image,
     sosmed: sosmed,
-    status: true
+    status: false
   })
 
   helpPost.save()
@@ -66,27 +66,17 @@ exports.getHelpPostById = (req, res, next) => {
 };
 
 exports.updatePost = (req, res, next) => {
-  const { name, pekerjaan, alamat, provinsi, deskripsi, kebutuhan, norek, image, sosmed, userId } = req.body
   const postId = req.params.postId
+  const donasi = req.body.donasi
+  console.log(donasi);
+
   helpPosts.findById(postId)
     .then(result => {
       if (!result) {
-        res.status(404).send({ message: "Not found Tutorial with id " + id });
+        res.status(404).send({ message: "Not found id " + id });
         console.log(eror);
       }
-
-      result.name = name
-      result.userId = userId
-      result.pekerjaan = pekerjaan
-      result.alamat = alamat
-      result.provinsi = provinsi
-      result.deskripsi = deskripsi
-      result.kebutuhan = kebutuhan
-      result.norek = norek
-      result.image = image
-      result.sosmed = sosmed
-      result.status = false
-
+      result.terkumpul = (parseInt(result.terkumpul) + parseInt(donasi))
       return result.save()
     })
     .then(result => {
@@ -98,4 +88,13 @@ exports.updatePost = (req, res, next) => {
     .catch(err => {
       next(err)
     })
+}
+
+exports.deletePost = async (req, res) => {
+  try {
+    const postDelete = await helpPosts.deleteOne({ _id: req.params.postId })
+    res.json(postDelete)
+  } catch (err) {
+    res.json({ message: err })
+  }
 }
